@@ -16,6 +16,7 @@
                         id="password"
                         type="password"
                         class="validate"
+                        autocomplete="on"
                 >
                 <label for="password">Пароль</label>
                 <small class="helper-text invalid">Password</small>
