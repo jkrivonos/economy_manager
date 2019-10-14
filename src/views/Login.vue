@@ -11,13 +11,15 @@
                 >
                 <label for="email">Email</label>
                 <small
-                    class="helper-text invalid"
-                    v-if="($v.email.$dirty && !$v.email.required)"
-                >Поле Email не должно быть пустым</small>
+                        class="helper-text invalid"
+                        v-if="($v.email.$dirty && !$v.email.required)"
+                >Поле Email не должно быть пустым
+                </small>
                 <small
                         class="helper-text invalid"
                         v-else-if="($v.email.$dirty && !$v.email.email)"
-                >Некорректный Email</small>
+                >Некорректный Email
+                </small>
             </div>
             <div class="input-field">
                 <input
@@ -32,11 +34,15 @@
                 <small
                         class="helper-text invalid"
                         v-if="($v.password.$dirty && !$v.password.required)"
-                >Поле Пароль не должно быть пустым</small>
+                >Поле Пароль не должно быть пустым
+                </small>
                 <small
                         class="helper-text invalid"
                         v-else-if="($v.password.$dirty && !$v.password.minLength)"
-                >Короткий Пароль. Сейчас его длина {{password.length}}. Длина должна быть {{$v.password.$params.minLength.min }}</small>
+                >
+                    Короткий Пароль. Сейчас его длина {{password.length}}. Длина должна быть {{$v.password.$params.minLength.min
+                    }}
+                </small>
             </div>
         </div>
         <div class="card-action">
@@ -59,6 +65,8 @@
 </template>
 <script>
     import {email, required, minLength} from 'vuelidate/lib/validators'
+    import messages from '../utils/messages'
+
     export default {
         name: 'login',
         data: () => ({
@@ -69,9 +77,14 @@
             email: {email, required},
             password: {required, minLength: minLength(6)}
         },
+        mounted() {
+            if (messages[this.$route.query.message]){
+                this.$message(messages[this.$route.query.message])
+            }
+        },
         methods: {
             submitHandler() {
-                if(this.$v.$invalid){
+                if (this.$v.$invalid) {
                     this.$v.$touch()
                     return
                 }

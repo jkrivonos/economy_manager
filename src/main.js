@@ -5,10 +5,12 @@ import router from './router'
 import store from 'vuex'
 import 'materialize-css/dist/js/materialize.min.js'
 import dateFilter from './filters/date.filter'
+import messagePlugin from './utils/message.plugin'
 
 Vue.config.productionTip = false;
 Vue.use(router);
 Vue.use(Vuelidate);
+Vue.use(messagePlugin);
 
 Vue.filter('date', dateFilter);
 new Vue({
